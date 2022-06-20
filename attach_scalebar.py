@@ -18,7 +18,7 @@ import metadata as meta_utils # pylint: disable=import-error
 # Read image data (either standard images via skimage.io, or mrcfile via the mrcfile module):
 
 parser = argparse.ArgumentParser(description=
-    "Attach a scalbar to an microscopy image given the pixel size or the metadata file."
+    "Attach a scalebar to an microscopy image given the pixel size or (implicitly) the metadata file, which has to resign in the same directory"
 )
 parser.add_argument(
     "img_file",
@@ -31,7 +31,8 @@ parser.add_argument(
     default=None,
     help="Overwrite the pixel size of the given image"
 )
-parser.add_argument("--equalize", action="store_true", help = "Enhance the contrast of output image")
+parser.add_argument("--equalize", action="store_true", help = "Enhance the contrast of the output image")
+parser.add_argument("--output_dpi_res", type=int, default=300)
 
 args = parser.parse_args()
 px_size = 0.0
@@ -76,12 +77,18 @@ if args.equalize:
 
 plt.figure(img_file_p.name)
 plt.imshow(img, cmap="gray")
+plt.axis("off")
 
 scalebar = ScaleBar(
     px_size,
-    location="lower left" 
+    location="lower left",
+    # frameon = False
 )
 plt.gca().add_artist(scalebar)
 
+output_img_format = ".png"
+output_p = img_dir_path / Path(f"{img_file_p.stem}_scalebar{output_img_format}")
+
+plt.savefig(output_p, bbox_inches="tight", pad_inches=0, dpi=args.output_dpi_res)
 
 plt.show()
