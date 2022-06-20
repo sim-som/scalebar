@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Mrc arg Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "test_images/K1-1to100_TMV_in_100mM_Tris-2%_Treh_in_H2O 57000 x 20210831 1051 Ceta.mrc"
+            ]
+        },
+        {
+            "name": "Python: tif arg Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "test_images/4F-Treh_5%-TMV_1to100_in_H2O 20220113 1316 6700 x Ceta.tif"
+            ]
+        },
+        {
+            "name": "Overwrite px_size",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "test_images/4F-Treh_5%-TMV_1to100_in_H2O 20220113 1316 6700 x Ceta.tif",
+                "--px_size",
+                "42"
+            ]
+        },
+        {
+            "name": "Equalize image",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "test_images/4F-Treh_5%-TMV_1to100_in_H2O 20220113 1316 6700 x Ceta.tif",
+                "--equalize"
+            ]
+        }
+    ]
+}
