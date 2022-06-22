@@ -10,7 +10,9 @@ from skimage import io
 from skimage.exposure import equalize_hist
 import argparse
 # own modules:
-metadata_p = Path("../Metadata")    # pylint: disable=import-error
+metadata_p = Path(r"C:\Users\simon\OneDrive\Dokumente\Studium\Master\Masterarbeit\Code\Metadata")    # pylint: disable=import-error
+metadata_p = metadata_p.absolute()
+print(metadata_p)
 assert metadata_p.exists() and metadata_p.is_dir()
 sys.path.insert(1, str(metadata_p))
 import metadata as meta_utils # pylint: disable=import-error
@@ -65,7 +67,8 @@ def attach_scalebar_to_img(img:np.ndarray, px_size:float):
     scalebar = ScaleBar(
         px_size,
         location="lower left",
-        frameon = args.frameon
+        frameon = args.frameon,
+        length_fraction=0.25
     )
     plt.gca().add_artist(scalebar)
 
