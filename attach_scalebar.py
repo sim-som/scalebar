@@ -9,6 +9,7 @@ import mrcfile
 from skimage import io
 from skimage.exposure import equalize_hist
 import argparse
+import time
 # own modules:
 metadata_p = Path(r"C:\Users\simon\OneDrive\Dokumente\Studium\Master\Masterarbeit\Code\Metadata")    # pylint: disable=import-error
 metadata_p = metadata_p.absolute()
@@ -73,7 +74,11 @@ def attach_scalebar_to_img(img:np.ndarray, px_size:float):
     plt.gca().add_artist(scalebar)
 
     output_img_format = ".png"
-    output_p = img_dir_path / Path(f"{img_file_p.stem}_scalebar{output_img_format}")
+    if args.equalize:
+        output_file_name = f"{img_file_p.stem}_scalebar_equalized{output_img_format}"
+    else:    
+        output_file_name = f"{img_file_p.stem}_scalebar{output_img_format}"
+    output_p = img_dir_path / Path(output_file_name)
 
     plt.savefig(output_p, bbox_inches="tight", pad_inches=0, dpi=args.output_dpi_res)
 
@@ -113,7 +118,11 @@ img_dir_path = img_file_p.parent
 # %%
 # main stuff:
 
+
+
 img, px_size = read_img_and_metadata(img_file_p)
+
+
 
 # overwrite pixel size with potential user input:
 if args.px_size:
@@ -123,3 +132,5 @@ print(f"Image shape: {img.shape} ")
 print(f"px size = {px_size} m")
 
 attach_scalebar_to_img(img, px_size)
+
+
